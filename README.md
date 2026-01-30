@@ -1,4 +1,4 @@
-# Deep Sets & Latent Topology: MNIST Point Cloud Analysis
+# Deep Sets: MNIST Point Cloud Analysis
 
 This repository contains the source code, experimental results, and implementations for an analysis of **Deep Sets** architectures and its limitations to the MNIST dataset.
 
@@ -76,5 +76,6 @@ Open your browser at `http://127.0.0.1:5000/`.
 *Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO*
 
 ```
+
 
 

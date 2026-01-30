@@ -1,6 +1,6 @@
 # Deep Sets & Latent Topology: MNIST Point Cloud Analysis
 
-This repository contains the source code, experimental results, and implementations for a Master's level analysis of **Deep Sets** architectures.
+This repository contains the source code, experimental results, and implementations for an analysis of **Deep Sets** architectures and its limitations to the MNIST dataset.
 
 The project validates the "Information Bottleneck" hypothesis proposed by *Wagstaff et al. (2019)* by training permutation-invariant networks to classify MNIST digits converted into 2D point clouds. It demonstrates how the **Latent Dimension ($N$)** constrains the model's ability to preserve topological information.
 
@@ -62,13 +62,6 @@ python app.py
 
 Open your browser at `http://127.0.0.1:5000/`.
 
-## 📉 Key Results
-
-The experiment empirically validates that:
-
-1. **Bottleneck ():** At low latent dimensions (e.g., ), accuracy collapses (<55%), confirming that the sum operator destroys topological information if the space is too small (Wagstaff's Theorem).
-2. **Saturation ():** Performance plateaus well below the theoretical bound of . This suggests the **intrinsic dimensionality** of MNIST digits is low, allowing efficient classification without meeting the strict condition for universal representation.
-
 ## 📚 References
 
 1. **Zaheer, M., et al. (2017).** *Deep Sets*. Advances in Neural Information Processing Systems (NIPS). 
@@ -83,4 +76,5 @@ The experiment empirically validates that:
 *Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO*
 
 ```
+
 

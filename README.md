@@ -4,7 +4,7 @@ This repository contains the source code, experimental results, and implementati
 
 The project validates the "Information Bottleneck" hypothesis proposed by *Wagstaff et al. (2019)* by training permutation-invariant networks to classify MNIST digits converted into 2D point clouds. It demonstrates how the **Latent Dimension ($N$)** constrains the model's ability to preserve topological information.
 
-## 📂 Repository Structure
+## Repository Structure
 ```text
 .
 ├── data/                    # Dataset storage (MNIST Point Clouds)
@@ -20,7 +20,7 @@ The project validates the "Information Bottleneck" hypothesis proposed by *Wagst
 └── MNIST_dataset_example.png # Visualization of the input data
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -62,7 +62,7 @@ python app.py
 
 Open your browser at `http://127.0.0.1:5000/`.
 
-## 📚 References
+## References
 
 1. **Zaheer, M., et al. (2017).** *Deep Sets*. Advances in Neural Information Processing Systems (NIPS). 
 
@@ -70,12 +70,9 @@ Open your browser at `http://127.0.0.1:5000/`.
 2. **Wagstaff, E., et al. (2019).** *On the Limitations of Representing Functions on Sets*. International Conference on Machine Learning (ICML). 
 
 
+## Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO
 
----
 
-*Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO*
-
-```
 
 
 

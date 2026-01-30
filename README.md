@@ -34,7 +34,7 @@ The project validates the Information Bottleneck hypothesis proposed by Wagstaff
 The project requires Python 3.8+ and the following libraries:
 
 ```bash
-pip install torch torchvision numpy matplotlib tqdm flask
+pip install torch torchvision numpy matplotlib flask
 
 ```
 
@@ -78,6 +78,7 @@ Open your browser at `http://127.0.0.1:5000/`.
 
 
 ## Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO
+
 
 
 

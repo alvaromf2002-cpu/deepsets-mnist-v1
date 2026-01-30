@@ -1,4 +1,3 @@
-# prepare_demo.py
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -11,18 +10,15 @@ def save_models():
     if not os.path.exists('saved_models'):
         os.makedirs('saved_models')
     
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # Elegimos 3 niveles representativos para la demo
+    device = torch.device("cpu")
+    # 3 latent spaces sizes for demo
     latent_dims = [2, 16, 128] 
-    epochs = 20 # Suficiente para MNIST
+    epochs = 20 
     
     train_loader, _ = get_dataloaders(batch_size=64, num_points=100)
     criterion = nn.CrossEntropyLoss()
     
-    print("--- Entrenando modelos para la Demo ---")
-    
     for dim in latent_dims:
-        print(f"\nEntrenando Modelo con Latent Dim = {dim}...")
         model = DeepSet(latent_dim=dim).to(device)
         optimizer = optim.Adam(model.parameters(), lr=0.001)
         
@@ -30,10 +26,9 @@ def save_models():
             loss, acc = train_one_epoch(model, train_loader, optimizer, criterion, device)
             print(f"  Epoch {epoch+1}/{epochs} - Acc: {acc:.1f}%")
             
-        # Guardar pesos
+        # Save weights on saved_models/ to use in demo
         save_path = f"saved_models/deepset_dim_{dim}.pth"
         torch.save(model.state_dict(), save_path)
-        print(f"-> Guardado en {save_path}")
 
 if __name__ == "__main__":
     save_models()

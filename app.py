@@ -1,4 +1,3 @@
-# app.py
 import torch
 import numpy as np
 import base64
@@ -9,59 +8,44 @@ from model import DeepSet
 
 app = Flask(__name__)
 
-# 1. Cargar modelos pre-entrenados en memoria al inicio
-device = torch.device("cpu") # CPU es suficiente para inferencia de 1 muestra
+# load pretrained models
+device = torch.device("cpu")
 models = {}
 latent_options = [2, 16, 128]
 
-print("Cargando modelos...")
 for dim in latent_options:
     m = DeepSet(latent_dim=dim)
-    # Asegúrate de haber ejecutado prepare_demo.py primero
     try:
         m.load_state_dict(torch.load(f"saved_models/deepset_dim_{dim}.pth", map_location=device))
         m.eval()
         models[dim] = m
-        print(f"Modelo N={dim} cargado.")
     except:
-        print(f"ALERTA: No se encontró 'saved_models/deepset_dim_{dim}.pth'. Ejecuta prepare_demo.py.")
-
-# Función auxiliar similar a tu dataset.py pero flexible
-# En app.py
+        print(f"model not found in 'saved_models/deepset_dim_{dim}.pth', run prepare_demo.py.")
 
 def image_to_pointcloud(image, num_points, shuffle):
-    # 1. Convertir a escala de grises
+    # convert to grayscale
     img = image.convert('L')
     
-    # 2. INVERTIR COLORES: 
-    # El canvas manda fondo blanco (255) y tinta negra (0).
-    # Queremos fondo negro (0) y tinta blanca (255) como MNIST.
+    # convert to black background (0) and white ink (255) like MNIST
     img = ImageOps.invert(img)
     
-    # 3. Redimensionar a 28x28
-    # Usamos BILINEAR para mantener la suavidad del trazo al reducir
+    # redimension to 28x28
     img = img.resize((28, 28), resample=Image.BILINEAR)
     img_np = np.array(img)
     
-    # 4. UMBRALIZADO (Threshold):
-    # Al reducir la imagen, los bordes quedan grises. 
-    # Filtramos para quedarnos solo con la tinta fuerte (> 50).
+    # threshold to keep only white (avoid grey '>50')
     coords = np.argwhere(img_np > 50).astype(np.float32)
     
-    # --- El resto sigue igual ---
-    
-    # Normalizar (0 a 1)
+    # normalize
     coords /= 28.0
     
     current_points = coords.shape[0]
     
     if current_points > 0:
-        # Si hay más puntos de los necesarios, muestreamos
-        # Si hay menos, usamos replace=True para rellenar repitiendo
         choice_idx = np.random.choice(current_points, num_points, replace=True)
         point_set = coords[choice_idx, :]
     else:
-        # Caso raro: imagen vacía
+        # empty image case handling
         point_set = np.zeros((num_points, 2), dtype=np.float32)
     
     if shuffle:
@@ -81,14 +65,14 @@ def predict():
     m_points = int(data['m_points'])
     do_shuffle = data['shuffle']
     
-    # Decodificar imagen
+    # img decode
     image_data = image_data.split(",")[1]
     image = Image.open(io.BytesIO(base64.b64decode(image_data)))
     
-    # Preprocesar
+    # preproc
     tensor_points = image_to_pointcloud(image, m_points, do_shuffle)
     
-    # Inferencia
+    # inference
     if n_dim not in models:
         return jsonify({'error': 'Modelo no cargado'}), 500
         

@@ -3,12 +3,12 @@
 This repository contains the source code, experimental results, and implementations for an analysis of **Deep Sets** architectures (Zaheer, M., et al. (2017)) and its limitations to the MNIST dataset.
 
 <p align="center">
-  <img src="MNIST_dataset_example.png" alt="MNIST Point Cloud Example" width="50%">
+  <img src="MNIST_dataset_example.png" alt="MNIST Point Cloud Example" width="40%">
 </p>
 The project validates the Information Bottleneck hypothesis proposed by Wagstaff et al. (2019) by training permutation-invariant networks to classify MNIST digits converted into 2D point clouds. It demonstrates how the Latent Dimension constrains the model's ability to preserve topological information.
 
 <p align="center">
-  <img src="demo.png" alt="Demo" width="50%">
+  <img src="demo.png" alt="Demo" width="80%">
 </p>
 
 ## Repository Structure
@@ -78,6 +78,7 @@ Open your browser at `http://127.0.0.1:5000/`.
 
 
 ## Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO
+
 
 
 

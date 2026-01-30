@@ -1,6 +1,3 @@
-Here is the updated `README.md`. I have adapted the file structure section to match your screenshot and removed the generic "Theoretical Background" section to keep it cleaner, as requested.
-
-```markdown
 # Deep Sets & Latent Topology: MNIST Point Cloud Analysis
 
 This repository contains the source code, experimental results, and implementations for a Master's level analysis of **Deep Sets** architectures.
@@ -9,7 +6,6 @@ The project validates the "Information Bottleneck" hypothesis proposed by *Wagst
 
 ## 📂 Repository Structure
 
-```text
 .
 ├── data/                    # Dataset storage (MNIST Point Clouds)
 ├── saved_models/            # Checkpoints for trained models
@@ -23,7 +19,6 @@ The project validates the "Information Bottleneck" hypothesis proposed by *Wagst
 ├── wagstaff_experiment_result.png # Generated results graph
 └── MNIST_dataset_example.png # Visualization of the input data
 
-```
 
 ## 🚀 Getting Started
 
@@ -36,7 +31,7 @@ pip install torch torchvision numpy matplotlib tqdm flask
 
 ```
 
-### 1. Reproducing the Scientific Experiment
+### 1. Reproducing the Scientific Experiment (NOT MANDATORY - Go to Section 2)
 
 To run the full experimental loop which trains multiple models with varying latent dimensions () and generates the comparison graph:
 
@@ -85,8 +80,9 @@ The experiment empirically validates that:
 
 ---
 
-*Author: Alvaro | Master in Engineering / Data Science*
+*Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO*
 
 ```
 
 ```
+

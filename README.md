@@ -39,7 +39,7 @@ pip install torch torchvision numpy matplotlib flask
 
 ```
 
-### 1. Reproducing the Scientific Experiment (NOT MANDATORY - Go to Section 2)
+### 1. Reproducing the Scientific Experiment (NOT MANDATORY - Go to Section 2.2)
 
 To run the full experimental loop which trains multiple models with varying latent dimensions () and generates the comparison graph:
 
@@ -54,7 +54,7 @@ python experiment.py
 
 To launch the interactive web interface where you can visualize predictions:
 
-First, ensure you have trained models (or run the preparation script):
+First, ensure you have trained models: (NOT MANDATORY - Go directly to Flask app)
 
 ```bash
 python prepare_demo.py
@@ -79,6 +79,7 @@ Open your browser at `http://127.0.0.1:5000/`.
 
 
 ## Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO
+
 
 
 

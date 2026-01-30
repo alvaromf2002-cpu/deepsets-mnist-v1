@@ -1,8 +1,7 @@
-# train.py
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from tqdm import tqdm
+
 
 def train_one_epoch(model, loader, optimizer, criterion, device):
     model.train()
@@ -43,4 +42,5 @@ def validate(model, loader, criterion, device):
             total += targets.size(0)
             correct += predicted.eq(targets).sum().item()
             
+
     return total_loss / len(loader), 100. * correct / total

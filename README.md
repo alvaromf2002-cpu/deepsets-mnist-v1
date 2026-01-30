@@ -5,7 +5,7 @@ This repository contains the source code, experimental results, and implementati
 The project validates the "Information Bottleneck" hypothesis proposed by *Wagstaff et al. (2019)* by training permutation-invariant networks to classify MNIST digits converted into 2D point clouds. It demonstrates how the **Latent Dimension ($N$)** constrains the model's ability to preserve topological information.
 
 ## 📂 Repository Structure
-
+```text
 .
 ├── data/                    # Dataset storage (MNIST Point Clouds)
 ├── saved_models/            # Checkpoints for trained models
@@ -18,7 +18,7 @@ The project validates the "Information Bottleneck" hypothesis proposed by *Wagst
 ├── train.py                 # Training and validation loops
 ├── wagstaff_experiment_result.png # Generated results graph
 └── MNIST_dataset_example.png # Visualization of the input data
-
+```
 
 ## 🚀 Getting Started
 
@@ -81,8 +81,6 @@ The experiment empirically validates that:
 ---
 
 *Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO*
-
-```
 
 ```
 

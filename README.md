@@ -1,103 +1,91 @@
-# Deep Sets Interactive Playground: MNIST Point Cloud
+Here is the updated `README.md`. I have adapted the file structure section to match your screenshot and removed the generic "Theoretical Background" section to keep it cleaner, as requested.
 
-A web-based interactive demonstration of **Deep Sets**, a neural network architecture designed to process unordered sets of data. 
+```markdown
+# Deep Sets & Latent Topology: MNIST Point Cloud Analysis
 
-This project transforms standard MNIST images into **2D Point Clouds** to demonstrate the unique properties of Deep Sets: **Permutation Invariance**, robustness to sparsity, and the impact of the **Latent Dimension** on model capacity (as discussed by Wagstaff et al.).
+This repository contains the source code, experimental results, and implementations for a Master's level analysis of **Deep Sets** architectures.
 
-![Demo Screenshot](https://via.placeholder.com/800x400?text=Deep+Sets+Interactive+Demo+Screenshot)
-*(Replace this link with an actual screenshot of your web interface once running)*
+The project validates the "Information Bottleneck" hypothesis proposed by *Wagstaff et al. (2019)* by training permutation-invariant networks to classify MNIST digits converted into 2D point clouds. It demonstrates how the **Latent Dimension ($N$)** constrains the model's ability to preserve topological information.
 
-## 🧠 Theoretical Background
+## 📂 Repository Structure
 
-Unlike Convolutional Neural Networks (CNNs) that rely on a fixed grid of pixels, **Deep Sets** treat data as a set $\{x_1, ..., x_M\}$ where the order does not matter.
-
-The architecture is defined by:
-$$f(X) = \rho \left( \sum_{x \in X} \phi(x) \right)$$
-
-* **$\phi$ (Encoder):** Processes each point individually to a latent representation.
-* **$\sum$ (Aggregation):** Sum-pooling ensures the operation is permutation invariant.
-* **$\rho$ (Decoder):** Classifies the global feature vector.
-
-### Key Concept: The Wagstaff Bottleneck
-As shown in the original paper *On the Limitations of Representing Functions on Sets*, the dimension of the latent space ($N$) is critical. If $N$ is too small compared to the set size ($M$), the sum operation crushes necessary topological information. This project includes an experiment visualizing this threshold.
-
-## 🚀 Features
-
-This interactive demo allows you to:
-
-1.  **Draw Digits:** Draw a number on an HTML5 canvas.
-2.  **Point Cloud Conversion:** See how the image is converted into a sparse set of normalized $(x, y)$ coordinates.
-3.  **Adjust Latent Dimension ($N$):** Switch between "Low Capacity" ($N=2$) and "High Capacity" ($N=128$) models to observe the information bottleneck in real-time.
-4.  **Decimation ($M$):** Reduce the number of sampled points (e.g., from 100 to 20) to see how robust Deep Sets are to data sparsity.
-5.  **Permutation Test:** "Shuffle" the input order of points to verify that the model's prediction remains mathematically identical.
-
-## 📂 Project Structure
-
-* `model.py`: PyTorch implementation of the Deep Set architecture ($\phi$ and $\rho$ networks).
-* `dataset.py`: Custom PyTorch Dataset that converts MNIST images to point clouds on the fly.
-* `experiment.py`: Script to train multiple models with varying latent dimensions and plot the accuracy curve.
-* `prepare_demo.py`: Script to pre-train and save specific models ($N=2, 16, 128$) for the web app.
-* `app.py`: Flask backend that serves the model and processes drawing data.
-* `templates/index.html`: The frontend interface.
-
-## 🛠️ Installation & Usage
-
-### 1. Clone and Install Dependencies
-Ensure you have Python 3.8+ installed.
-
-```bash
-git clone [https://github.com/yourusername/deepsets-mnist-demo.git](https://github.com/yourusername/deepsets-mnist-demo.git)
-cd deepsets-mnist-demo
-pip install torch torchvision numpy matplotlib flask pillow tqdm
+```text
+.
+├── data/                    # Dataset storage (MNIST Point Clouds)
+├── saved_models/            # Checkpoints for trained models
+├── templates/               # HTML templates for the web demo
+├── app.py                   # Flask application for the web interface
+├── dataset.py               # Custom PyTorch Dataset (Image -> Point Cloud conversion)
+├── experiment.py            # Main script: Latent Dimension vs. Accuracy experiment
+├── model.py                 # Deep Sets architecture implementation (Phi + Rho)
+├── prepare_demo.py          # Script to pre-train models for the demo app
+├── train.py                 # Training and validation loops
+├── wagstaff_experiment_result.png # Generated results graph
+└── MNIST_dataset_example.png # Visualization of the input data
 
 ```
 
-### 2. Generate Pre-trained Models
+## 🚀 Getting Started
 
-Before running the web server, you need to train the models that the demo will use. This script trains three variations () and saves them to `/saved_models`.
+### Prerequisites
+
+The project requires Python 3.8+ and the following libraries:
 
 ```bash
-python prepare_demo.py
+pip install torch torchvision numpy matplotlib tqdm flask
 
 ```
 
-*Note: This utilizes the training logic defined in `train.py`.*
+### 1. Reproducing the Scientific Experiment
 
-### 3. Run the Web App
-
-Start the Flask server:
-
-```bash
-python app.py
-
-```
-
-### 4. Open in Browser
-
-Navigate to `http://127.0.0.1:5000` in your web browser.
-
-## 🧪 Experiments
-
-The repository also contains the code to reproduce the "Accuracy vs. Latent Dimension" graph found in Wagstaff et al.
-
-To run the full experiment:
+To run the full experimental loop which trains multiple models with varying latent dimensions () and generates the comparison graph:
 
 ```bash
 python experiment.py
 
 ```
 
-This will generate `wagstaff_experiment_result.png` showing the drop in accuracy when .
+*This will automatically download MNIST, train the models, and save `wagstaff_experiment_result.png`.*
+
+### 2. Running the Web Demo
+
+To launch the interactive web interface where you can visualize predictions:
+
+First, ensure you have trained models (or run the preparation script):
+
+```bash
+python prepare_demo.py
+
+```
+
+Then, start the Flask app:
+
+```bash
+python app.py
+
+```
+
+Open your browser at `http://127.0.0.1:5000/`.
+
+## 📉 Key Results
+
+The experiment empirically validates that:
+
+1. **Bottleneck ():** At low latent dimensions (e.g., ), accuracy collapses (<55%), confirming that the sum operator destroys topological information if the space is too small (Wagstaff's Theorem).
+2. **Saturation ():** Performance plateaus well below the theoretical bound of . This suggests the **intrinsic dimensionality** of MNIST digits is low, allowing efficient classification without meeting the strict condition for universal representation.
 
 ## 📚 References
 
-1. **Deep Sets**: Zaheer, M., et al. (2017). *Deep Sets*. NIPS.
-2. **Limitations**: Wagstaff, E., et al. (2019). *On the Limitations of Representing Functions on Sets*. ICML.
-3. **MNIST**: LeCun, Y., et al. *Gradient-based learning applied to document recognition*.
+1. **Zaheer, M., et al. (2017).** *Deep Sets*. Advances in Neural Information Processing Systems (NIPS). 
+
+
+2. **Wagstaff, E., et al. (2019).** *On the Limitations of Representing Functions on Sets*. International Conference on Machine Learning (ICML). 
+
+
 
 ---
 
-*Created for educational purposes to demonstrate the capabilities of Set-based Neural Networks.*
+*Author: Alvaro | Master in Engineering / Data Science*
 
 ```
 

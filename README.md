@@ -39,7 +39,7 @@ pip install torch torchvision numpy matplotlib flask
 
 ```
 
-### 1. Reproducing the Scientific Experiment (NOT MANDATORY - Go to Section 2.2)
+### 1. Reproducing the Scientific Experiment (NOT MANDATORY - Go to Section 3)
 
 To run the full experimental loop which trains multiple models with varying latent dimensions () and generates the comparison graph:
 
@@ -50,16 +50,17 @@ python experiment.py
 
 *This will automatically download MNIST, train the models, and save `wagstaff_experiment_result.png`.*
 
-### 2. Running the Web Demo
+### 2. Preparing the Web Demo (NOT MANDATORY - Go to Section 3)
 
 To launch the interactive web interface where you can visualize predictions:
 
-First, ensure you have trained models: (NOT MANDATORY - Go directly to Flask app)
-
+First, ensure you have trained models: 
 ```bash
 python prepare_demo.py
 
 ```
+
+### 3. Running the Web Demo
 
 Then, start the Flask app:
 
@@ -79,6 +80,7 @@ Open your browser at `http://127.0.0.1:5000/`.
 
 
 ## Author: Alvaro Martínez Felipe, SDD, Engineering Diploma ISAE SUPAERO
+
 
 
 
